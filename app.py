@@ -6,6 +6,10 @@ import yt_dlp
 import os
 import time
 import secrets
+import subprocess
+
+# Creamos la aplicación Flask
+app = Flask(__name__)
 
 limiter = Limiter(
     app,
@@ -13,12 +17,8 @@ limiter = Limiter(
     default_limits=["50 por dia", "10 por hora"]
 )
 
-# Creamos la aplicación Flask
-app = Flask(__name__)
-
 # Esta llave protege tu página
 app.secret_key = secrets.token_hex(16)
-print("🔐 Llave de seguridad creada")
 
 # Configuración para las descargas
 DOWNLOAD_FOLDER = 'downloads'
@@ -47,7 +47,6 @@ def procesar_enlaces():
     
     # Verificar FFmpeg
     try:
-        import subprocess
         subprocess.run(['ffmpeg', '-version'], capture_output=True, check=True)
         ffmpeg_disponible = True
     except:
