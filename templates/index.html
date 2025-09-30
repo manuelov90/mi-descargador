@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargador MP3 de YouTube</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Encabezado -->
+        <header class="encabezado">
+            <h1>🎵 Descargador MP3 de YouTube</h1>
+            <p>Pega tus enlaces de YouTube separados por <strong>punto y coma (;)</strong></p>
+        </header>
+
+        <!-- Área principal -->
+        <main class="principal">
+            <!-- Sección de entrada -->
+            <div class="seccion-entrada">
+                <label for="caja-enlaces">Enlaces de YouTube:</label>
+                <textarea 
+                    id="caja-enlaces" 
+                    placeholder="Ejemplo: https://youtube.com/watch?v=abc123 ; https://youtube.com/watch?v=def456"
+                    rows="6"
+                ></textarea>
+                
+                <div class="controles">
+                        <!-- Selector de formato -->
+                <div class="selector-formato">
+                    <label for="selector-formato">Formato:</label>
+                    <select id="selector-formato" class="selector">
+                        <option value="mp3">🎵 MP3 (Solo Audio)</option>
+                        <option value="mp4">🎬 MP4 (Video)</option>
+                    </select>
+                </div>
+    
+    <button id="boton-descargar" class="boton-principal">
+        🎧 Descargar
+    </button>
+                </div>
+            </div>
+
+            <!-- Sección de resultados -->
+            <div class="seccion-resultados" id="seccion-resultados" style="display: none;">
+                <h3>Resultados de la Descarga</h3>
+                <div id="lista-resultados"></div>
+            </div>
+
+            <!-- Sección de progreso -->
+            <div class="seccion-progreso" id="seccion-progreso" style="display: none;">
+                <h3>Progreso</h3>
+                <div class="barra-progreso">
+                    <div class="relleno-progreso" id="relleno-progreso"></div>
+                </div>
+                <p id="texto-progreso">Preparando descarga...</p>
+            </div>
+        </main>
+
+        <!-- Pie de página -->
+        <footer class="pie-pagina">
+            <p>✨ Hecho con Python y Flask ✨</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
