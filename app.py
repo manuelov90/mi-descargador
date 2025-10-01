@@ -68,6 +68,10 @@ def procesar_enlaces():
                         }],
                         'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
                         'quiet': True,
+                        'extract_flat': False,
+                        'ignoreerrors': True,
+                        'no_warnings': True,
+                        'restrictfilenames': True,
                     }
                 else:
                     # Si no hay FFmpeg, descargar mejor audio disponible
