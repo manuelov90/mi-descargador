@@ -12,9 +12,9 @@ import subprocess
 app = Flask(__name__)
 
 limiter = Limiter(
-    app,
+    app=app,
     key_func=get_remote_address,
-    default_limits=["50 por dia", "10 por hora"]
+    default_limits=["50 per day", "10 per hour"]
 )
 
 # Esta llave protege tu página
@@ -33,7 +33,7 @@ def pagina_principal():
     return render_template('index.html')
 
 @app.route('/procesar', methods=['POST'])
-@limiter.limit("5 por minuto")
+@limiter.limit("5 per minute")
 def procesar_enlaces():
     """Esta función procesa los enlaces de YouTube para MP3 o MP4"""
     
