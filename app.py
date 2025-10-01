@@ -1,4 +1,4 @@
-# app.py - El cerebro de nuestra aplicación
+# app.py 
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -72,6 +72,19 @@ def procesar_enlaces():
                         'ignoreerrors': True,
                         'no_warnings': True,
                         'restrictfilenames': True,
+                        # CONFIGURACIONES ANTI-BOT
+                        'socket_timeout': 30,
+                        'retries': 10,
+                        'fragment_retries': 10,
+                        'skip_unavailable_fragments': True,
+                        'http_headers': {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                            'Accept-Language': 'en-us,en;q=0.5',
+                            'Accept-Encoding': 'gzip, deflate',
+                            'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+                            'Connection': 'keep-alive',
+                        }
                     }
                 else:
                     # Si no hay FFmpeg, descargar mejor audio disponible
@@ -79,14 +92,48 @@ def procesar_enlaces():
                         'format': 'bestaudio/best',
                         'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
                         'quiet': True,
+                        # ↓↓↓ CONFIGURACIÓN ANTI-BOT ↓↓↓
+                        'extract_flat': False,
+                        'ignoreerrors': True,
+                        'no_warnings': True,
+                        'restrictfilenames': True,
+                        'socket_timeout': 30,
+                        'retries': 10,
+                        'fragment_retries': 10,
+                        'skip_unavailable_fragments': True,
+                        'http_headers': {
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                            'Accept-Language': 'en-us,en;q=0.5',
+                            'Accept-Encoding': 'gzip, deflate',
+                            'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+                            'Connection': 'keep-alive',
+                        }
                     }
                     
             else:  # formato == 'mp4'
                 # CONFIGURACIÓN PARA MP4 (VIDEO)
                 configuracion = {
-                    'format': 'best[height<=720]',  # Calidad máxima 720p
+                    'format': 'best[height<=720]',
                     'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
                     'quiet': True,
+                    # ↓↓↓ CONFIGURACIÓN ANTI-BOT
+                    'extract_flat': False,
+                    'ignoreerrors': True,
+                    'no_warnings': True,
+                    'restrictfilenames': True,
+                    'socket_timeout': 30,
+                    'retries': 10,
+                    'fragment_retries': 10,
+                    'skip_unavailable_fragments': True,
+                    'http_headers': {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                        'Accept-Language': 'en-us,en;q=0.5',
+                        'Accept-Encoding': 'gzip, deflate',
+                        'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
+                        'Connection': 'keep-alive',
+                    }
                 }
             
             # Realizar la descarga
