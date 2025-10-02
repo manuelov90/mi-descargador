@@ -78,6 +78,10 @@ def procesar_enlaces():
                         'fragment_retries': 10,
                         'skip_unavailable_fragments': True,
                         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                        'extractor_retries': 3,
+                        'sleep_interval': 5,
+                        'max_sleep_interval': 10,
+                        'throttled_rate': '100K',
                     }
                 else:
                     # Si no hay FFmpeg, descargar mejor audio disponible
@@ -95,12 +99,16 @@ def procesar_enlaces():
                         'fragment_retries': 10,
                         'skip_unavailable_fragments': True,
                         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                        'extractor_retries': 3,
+                        'sleep_interval': 5,
+                        'max_sleep_interval': 10,
+                        'throttled_rate': '100K',
                     }
                     
             else:  # formato == 'mp4'
                 # CONFIGURACIÓN PARA MP4 (VIDEO)
                 configuracion = {
-                    'format': 'best[height<=720]',
+                    'format': 'bv[height<=480]+ba/b[height<=480]',
                     'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
                     'quiet': True,
                     # ↓↓↓ CONFIGURACIÓN ANTI-BOT
@@ -113,6 +121,10 @@ def procesar_enlaces():
                     'fragment_retries': 10,
                     'skip_unavailable_fragments': True,
                     'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'extractor_retries': 3,
+                    'sleep_interval': 5,
+                    'max_sleep_interval': 10,
+                    'throttled_rate': '100K',
                 }
             
             # Realizar la descarga
